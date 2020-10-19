@@ -2,7 +2,6 @@ import numpy as np
 from gym.spaces import Box, Discrete
 
 import smarts
-from smarts.env.visualization import build_visdom_watcher_queue
 from smarts.core.agent_interface import AgentInterface, AgentType
 from smarts.core.scenario import Scenario
 from smarts.core.smarts import SMARTS
@@ -53,8 +52,6 @@ class PyMARLHiWayEnv:
             used to specify a specific sumo port (default None)
         timestep_sec:
             the step length for all components of the simulation (default 0.1)
-        visdom:
-            true|false visdom integration (default False)
     """
 
     def __init__(self, config):
@@ -102,10 +99,6 @@ class PyMARLHiWayEnv:
             )
             for i, agent_id, in enumerate(self._agent_ids)
         }
-
-        self._visdom_obs_queue = None
-        if self._config.get("visdom", False):
-            self._visdom_obs_queue = build_visdom_watcher_queue()
 
         envision = None
         if not self._headless:
