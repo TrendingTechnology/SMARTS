@@ -275,6 +275,7 @@ class TrapManager:
             True,
             sim.scenario.surface_patches,
             sim.scenario.controller_parameters_filepath,
+            boid=False,
         )
         return vehicle
 
