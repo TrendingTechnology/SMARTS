@@ -1,7 +1,3 @@
-import socketserver
-from functools import partial
-from http.server import SimpleHTTPRequestHandler
-
 import click
 
 from envision.server import run
