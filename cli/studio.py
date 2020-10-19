@@ -46,8 +46,11 @@ def _build_single_scenario(clean, scenario):
         with pkg_resources.path(zoo.policies, "") as path:
             # Serve policies through the static file server, then kill after the
             # scenario has been created
+            cmd = f"twistd -n web --path {path}"
             proc = subprocess.Popen(
-                f"twistd -n web --path {path}",
+                # By adding `exec`, `Popen` returns the actual twistd process,
+                # which will be terminated later to avoid leaking.
+                "exec " + cmd,
                 shell=True,
                 # Hide output to keep display simple
                 stdout=subprocess.DEVNULL,
